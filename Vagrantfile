@@ -6,6 +6,17 @@
 # modified for the assumption that the agents are correctly installed.
 @lr_install_agents = true
 
+# enabled by default, if set to false, downloading packages will be disabled on base boxes, so the enviromnent can be built
+# offline.
+# please note that then you must have installed base boxes for composite cluster and composite1 and composite2.
+# works currently only with composite env.
+# before setting it to false, be sure to download and install these boxes:
+# 1) Base box for compositecluster:
+#
+# 2) Base box for composite1 & composite2:
+#
+@downloads_enabled = true
+
 # If needed, the IP addresses used can be changed below.
 @lr_subnet = "10.127.128"
 @lr_ip_host = "#{@lr_subnet}.1"
@@ -94,6 +105,11 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :compositecluster do |config|
+   unless !@downloads_enabled
+      config.vm.provider "virtualbox" do |vb, override|
+        override.vm.box = "cluster"
+      end
+    end
     config.vm.network :private_network, ip: @lr_ip_compositecluster
     config.vm.provision :chef_solo do |chef|
       chef_config(chef)
@@ -153,6 +169,9 @@ def chef_config(chef)
   chef.cookbooks_path = "cookbooks"
   chef.data_bags_path = "data_bags"
   chef.roles_path = "roles"
+  chef.json.deep_merge!({
+    :downloads_enabled => @downloads_enabled
+  })
 end
 
 def chef_hosts_config(chef)
@@ -304,6 +323,12 @@ def chef_php(config, ipAddress, identifier)
 end
 
 def chef_composite(config, ipAddress, identifier)
+  unless !@downloads_enabled
+    config.vm.provider "virtualbox" do |vb, override|
+      override.vm.box = "composite"
+    end
+  end
+
   config.vm.network :private_network, ip: ipAddress
   config.vm.provision :chef_solo do |chef|
     chef_config(chef)

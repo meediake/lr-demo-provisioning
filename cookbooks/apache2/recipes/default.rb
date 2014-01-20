@@ -19,6 +19,9 @@
 
 package "apache2" do
   package_name node['apache']['package']
+  not_if do
+    !node['downloads_enabled']
+  end
 end
 
 service "apache2" do
@@ -48,7 +51,11 @@ if platform_family?("rhel", "fedora", "arch", "suse", "freebsd")
     mode 00755
   end
 
-  package "perl"
+  package "perl" do
+    not_if do
+      !node['downloads_enabled']
+    end
+  end
 
   cookbook_file "/usr/local/bin/apache2_module_conf_generate.pl" do
     source "apache2_module_conf_generate.pl"

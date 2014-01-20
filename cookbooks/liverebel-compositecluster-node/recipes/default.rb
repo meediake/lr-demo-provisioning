@@ -1,5 +1,8 @@
 gem_package "vagrant-vbguest" do
   action :install
+  not_if do
+    !node['downloads_enabled']
+  end
 end
 
 include_recipe "openssl"

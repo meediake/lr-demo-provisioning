@@ -30,7 +30,8 @@ execute "install-selenium" do
   command "jar xvf #{selenium_zip}"
   action :nothing
   not_if do
-    File.exists?(selenium_installed_path)
+    File.exists?(selenium_installed_path) ||
+    !node['downloads_enabled']
   end
 end
 
@@ -41,7 +42,8 @@ remote_file selenium_zip_path do
   mode 00644
   notifies :run, "execute[install-selenium]", :immediately
   not_if do
-    File.exists?(selenium_zip_path)
+    File.exists?(selenium_zip_path) ||
+    !node['downloads_enabled']
   end
 end
 
