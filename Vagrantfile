@@ -12,8 +12,9 @@
 # works currently only with composite env.
 # before setting it to false, be sure to download and install these boxes:
 # 1) Base box for compositecluster:
-#
+# vagrant box add cluster https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/compositecluster.box
 # 2) Base box for composite1 & composite2:
+# vagrant box add composite https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/composite.box
 #
 @downloads_enabled = true
 
