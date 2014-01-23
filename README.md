@@ -508,3 +508,6 @@ Remarks about the provided files
   ``/home/vagrant/.ssh/authorized_keys`` on each node, make sure to take this
   into account when you base production machines on this configuration, you'll
   most certainly want to use your own keys
+
+Running composite enviromnent offline
+=====================================
