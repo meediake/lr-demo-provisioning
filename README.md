@@ -533,7 +533,9 @@ They were built running Vagrant online and they do not have LR agents installed.
 4. Run LiveRebel
 
 5. Run Vagrant:
-vagrant up composite1 composite2 compositecluster
+    ```
+    vagrant up composite1 composite2 compositecluster
+    ```
 
 It should all work without internet connection, all apt and package download operations are disabled. Only configuration
 is being written on new virtual machines.
