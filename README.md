@@ -514,12 +514,12 @@ Running composite environment offline
 To run composite environment offline, you need to install bases boxes built for composite environment.
 They were built running Vagrant online and they do not have LR agents installed.
 
-1. Add compositecluster box to your Vagrant:
+1. Add box "compositecluster" to your Vagrant:
     ```
     vagrant box add cluster https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/compositecluster.box
     ```
 
-2. Add composite box to your Vagrant:
+2. Add box "composite" to your Vagrant:
     ```
     vagrant box add composite https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/composite.box
     ```
