@@ -521,6 +521,7 @@ vagrant box add cluster https://dl.dropboxusercontent.com/u/101633095/lr-demo-bo
 vagrant box add composite https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/composite.box
 
 3. Open Vagrantfile and set following variables like here (enable installing agents and disable downloads):
+
 * @lr_install_agents = true
 
 * @downloads_enabled = false
