@@ -509,5 +509,24 @@ Remarks about the provided files
   into account when you base production machines on this configuration, you'll
   most certainly want to use your own keys
 
-Running composite enviromnent offline
+Running composite environment offline
 =====================================
+To run composite environment offline, you need to install bases boxes built for composite environment. They were built
+running Vagrant offline and they do not have LR agents installed.
+1. Add compositecluster box to your Vagrant:
+vagrant box add cluster https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/compositecluster.box
+
+2. Add composite box to your Vagrant:
+vagrant box add composite https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/composite.box
+
+3. Open Vagrantfile and set following variables like here:
+@lr_install_agents = true
+@downloads_enabled = false
+
+4. Run LiveRebel
+
+5. Run Vagrant:
+vagrant up composite1 composite2 compositecluster
+
+It should all work without internet connection, all apt and package download operations are disabled. Only configuration
+is being written on new virtual machines.
