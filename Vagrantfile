@@ -16,7 +16,7 @@
 # 2) Base box for composite1 & composite2:
 # vagrant box add composite https://dl.dropboxusercontent.com/u/101633095/lr-demo-boxes/composite.box
 #
-@downloads_enabled = true
+@downloads_enabled = false
 
 # If needed, the IP addresses used can be changed below.
 @lr_subnet = "10.127.128"
@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :compositecluster do |config|
-   unless !@downloads_enabled
+    if !@downloads_enabled
       config.vm.provider "virtualbox" do |vb, override|
         override.vm.box = "cluster"
       end
@@ -154,8 +154,70 @@ def chef_cluster_config(chef, ipAddress)
   })
 end
 
+def chef_tomcat_config(chef, ipAddress, identifier)
+  chef.add_recipe "liverebel-tomcat-node"
+  chef.json.deep_merge!({
+    :liverebel => {
+      :install_agents => @lr_install_agents ? 'On' : 'Off',
+      :hostip => @lr_ip_host,
+      :agentip => ipAddress,
+      :tomcat_tunnelport => 18080+identifier
+    },
+    :tomcat => {
+      :jvm_route => identifier
+    },
+    :selenium => {
+      :base_url => @selenium_base_url
+    }
+  })
+end
+
+def chef_php_config(chef, ipAddress, identifier)
+  chef.add_recipe "liverebel-php-node"
+  chef.json.deep_merge!({
+    :liverebel => {
+      :install_agents => @lr_install_agents ? 'On' : 'Off',
+      :hostip => @lr_ip_host,
+      :agentip => ipAddress,
+      :php_tunnelport => 19080+identifier,
+      :agent => {
+        :user => 'lragent',
+        :group => 'www-data',
+        :type => 'proxy'
+      }
+    },
+    :php => {
+      :server_route => identifier
+    },
+    :phpunit => {
+      :install_method => "pear",
+      :version => "3.7.14"
+    }
+  })
+end
+
+def chef_tomcat(config, ipAddress, identifier)
+  config.vm.network :private_network, ip: ipAddress
+  config.vm.provision :chef_solo do |chef|
+    chef_config(chef)
+    chef_apt_config(chef)
+    chef_hosts_config(chef)
+    chef_tomcat_config(chef, ipAddress, identifier)
+  end
+end
+
+def chef_php(config, ipAddress, identifier)
+  config.vm.network :private_network, ip: ipAddress
+  config.vm.provision :chef_solo do |chef|
+    chef_config(chef)
+    chef_apt_config(chef)
+    chef_hosts_config(chef)
+    chef_php_config(chef, ipAddress, identifier)
+  end
+end
+
 def chef_composite(config, ipAddress, identifier)
-  unless !@downloads_enabled
+  if !@downloads_enabled
     config.vm.provider "virtualbox" do |vb, override|
       override.vm.box = "composite"
     end
