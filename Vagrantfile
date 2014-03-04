@@ -96,10 +96,7 @@ def chef_hosts_config(chef)
       :java2 => @lr_ip_tomcat2,
       :php => @lr_ip_phpcluster,
       :php1 => @lr_ip_php1,
-      :php2 => @lr_ip_php2,
-      :jboss => @lr_ip_jbosscluster,
-      :jboss1 => @lr_ip_jboss1,
-      :jboss2 => @lr_ip_jboss2
+      :php2 => @lr_ip_php2
     }
   })
 end
@@ -116,10 +113,7 @@ def chef_hosts_config_composite(chef)
       :php1 => @lr_ip_composite1,
       :php2 => @lr_ip_composite2,
       :composite1 => @lr_ip_composite1,
-      :composite2 => @lr_ip_composite2,
-      :jboss => @lr_ip_jbosscluster,
-      :jboss1 => @lr_ip_jboss1,
-      :jboss2 => @lr_ip_jboss2
+      :composite2 => @lr_ip_composite2
     }
   })
 end
