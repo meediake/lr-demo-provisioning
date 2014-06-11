@@ -512,7 +512,7 @@ Remarks about the provided files
 Running composite environment offline
 =====================================
 Offline boxes are meant for skipping long provisioning process while setting up the environment. Instead of letting Chef
-to download everything from zero, you already have boxes with all necessary packages downloading. You can just add
+to download everything from zero, you already have boxes with all necessary packages downloaded. You can just add
 these boxes to your vagrant and follow all steps like described originally.
 
 To run composite environment offline, you need to install bases boxes built for composite environment.
