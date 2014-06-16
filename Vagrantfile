@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :compositecluster do |config|
-    if !@downloads_enabled
+    if not @downloads_enabled
       config.vm.provider "virtualbox" do |vb, override|
         override.vm.box = "cluster"
       end
@@ -211,7 +211,7 @@ def chef_php(config, ipAddress, identifier)
 end
 
 def chef_composite(config, ipAddress, identifier)
-  if !@downloads_enabled
+  if not @downloads_enabled
     config.vm.provider "virtualbox" do |vb, override|
       override.vm.box = "composite"
     end
