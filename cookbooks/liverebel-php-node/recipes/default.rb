@@ -13,7 +13,7 @@ include_recipe "apache2::mod_php5"
 include_recipe "apache2::mod_rewrite"
 include_recipe "liverebel-standalone-agent"
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   package "php5-mysql" do
     action :install
