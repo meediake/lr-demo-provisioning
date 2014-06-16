@@ -35,10 +35,12 @@ template "#{phpunit_dir}/composer.json" do
 	)
 end
 
-#composer update
-execute "phpunit-composer" do
-	user "root"
-	cwd phpunit_dir
-	command "composer update"
-	action :run
+if node['downloads_enabled']
+  #composer update
+  execute "phpunit-composer" do
+    user "root"
+    cwd phpunit_dir
+    command "composer update"
+    action :run
+  end
 end

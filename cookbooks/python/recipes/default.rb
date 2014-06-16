@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   include_recipe "python::#{node['python']['install_method']}"
   include_recipe "python::pip"

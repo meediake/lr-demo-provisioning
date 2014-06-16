@@ -7,7 +7,7 @@
 
 include_recipe "php"
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   #install/upgrade curl
   package "curl" do

@@ -18,7 +18,7 @@
 #
 
 # Install the unzip package
-unless node['downloads_enabled']
+if node['downloads_enabled']
   package "unzip" do
     action :install
   end

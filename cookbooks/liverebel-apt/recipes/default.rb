@@ -1,6 +1,6 @@
 include_recipe "apt"
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
   if !"#{node['apt']['repository']}".empty?
     file "/etc/apt/sources.list" do
       action :delete

@@ -33,7 +33,7 @@ directory node['selenium']['home']+'init/' do
   recursive true
 end
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   remote_file File.join(node['selenium']['server']['installpath'], 'selenium-server-standalone.jar') do
     source "http://selenium.googlecode.com/files/selenium-server-standalone-#{node['selenium']['server']['version']}.jar"

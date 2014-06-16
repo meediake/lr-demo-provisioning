@@ -1,3 +1,4 @@
+
 gem_package "vagrant-vbguest" do
   action :install
 end

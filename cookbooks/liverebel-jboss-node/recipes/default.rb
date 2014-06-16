@@ -23,7 +23,7 @@ selenium_zip = "selenium-java-#{selenium_version}.zip"
 selenium_zip_path = "#{jb7home}/#{selenium_zip}"
 selenium_installed_path = "#{jb7home}/selenium-2.31.0"
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   execute "install-selenium" do
     cwd jb7home

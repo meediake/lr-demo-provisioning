@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   include_recipe "php::#{node['php']['install_method']}"
 

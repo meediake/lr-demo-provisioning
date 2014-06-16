@@ -16,7 +16,7 @@ jb7user = node["jboss7"]["user"]
 jb7group = node["jboss7"]["group"]
 jb7install = "#{jb7target}/jboss-as-#{jb7ver}.Final"
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   # Create group
   group "#{jb7group}" do

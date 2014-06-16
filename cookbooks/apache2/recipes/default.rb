@@ -17,10 +17,9 @@
 # limitations under the License.
 #
 
-package "apache2" do
-  package_name node['apache']['package']
-  not_if do
-    !node['downloads_enabled']
+if node['downloads_enabled']
+  package "apache2" do
+    package_name node['apache']['package']
   end
 end
 
@@ -51,9 +50,8 @@ if platform_family?("rhel", "fedora", "arch", "suse", "freebsd")
     mode 00755
   end
 
-  package "perl" do
-    not_if do
-      !node['downloads_enabled']
+  if node['downloads_enabled']
+    package "perl" do
     end
   end
 

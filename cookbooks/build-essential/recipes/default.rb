@@ -21,7 +21,7 @@ require 'chef/shell_out'
 
 compiletime = node['build_essential']['compiletime']
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   case node['platform_family']
   when "rhel", "suse", "fedora", "debian"

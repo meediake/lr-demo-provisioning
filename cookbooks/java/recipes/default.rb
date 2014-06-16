@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   include_recipe "java::#{node['java']['install_flavor']}"
 

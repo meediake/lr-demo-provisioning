@@ -1,7 +1,6 @@
-gem_package "vagrant-vbguest" do
-  action :install
-  not_if do
-    !node['downloads_enabled']
+if node['downloads_enabled']
+  gem_package "vagrant-vbguest" do
+    action :install
   end
 end
 

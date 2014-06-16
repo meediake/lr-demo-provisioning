@@ -28,14 +28,14 @@ unless apt_installed?
   return
 end
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   # Run apt-get update to create the stamp file
   execute "apt-get-update" do
     command "apt-get update"
     ignore_failure true
     not_if do
-      ::File.exists?('/var/lib/apt/periodic/update-success-stamp') || !node['downloads_enabled']
+      ::File.exists?('/var/lib/apt/periodic/update-success-stamp')
     end
   end
 

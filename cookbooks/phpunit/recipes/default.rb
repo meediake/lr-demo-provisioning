@@ -5,7 +5,7 @@
 # Copyright 2012, Escape Studios
 #
 
-unless node['downloads_enabled']
+if node['downloads_enabled']
 
   case node[:phpunit][:install_method]
     when "pear"
